@@ -33,7 +33,7 @@ position Root(Arbol *T){
 }
 
 position Parent(Arbol *T, position p){
-    if ((*T)->derecha == p || (*T)->izquierda == p){
+    if ((*T)->derecha == p || (*T)->izquierda == p || (*T) == p){
         return (*T);
     }
     else {

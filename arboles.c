@@ -65,8 +65,8 @@ int main (void)
 	e.c='K';
 	NewRightSon(&a,p,e);
 
-    printf("Recorrido PreOrden: ");
-    PreOrden(&a);
+    //printf("Recorrido PreOrden: ");
+    //PreOrden(&a);
     printf("\n");
     printf("Recorrido InOrden: ");
     InOrden(&a);

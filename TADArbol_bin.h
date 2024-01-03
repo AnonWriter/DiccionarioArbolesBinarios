@@ -18,6 +18,9 @@ typedef char bool;
 // Definimos un elemento como una estructura representando cualquier cosa.
 typedef struct element{
     char c;
+    int n;
+    char palabra[101];
+    char definicion[251];
 } element;
 
 // Definimos un nodo para el árbol binario como una estructura que contiene punteros a otra estructura de su tipo.
