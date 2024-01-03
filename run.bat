@@ -1,3 +1,3 @@
 echo "se corre"
-gcc diccionario.c TADArbol_bin.c -o main
+gcc main.c TADArbol_bin.c Diccionario.c -o main
 .\main

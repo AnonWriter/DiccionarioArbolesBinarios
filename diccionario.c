@@ -1,23 +1,6 @@
-#include "./TADArbol_bin.h"
-
-#include <stdio.h>
-#include <stdlib.h>
+#include "./Diccionario.h"
 #include <string.h>
-
-// Hacer un árbol binario de búsqueda
-// Usar strcmp para ubicar palabras mayores y menores
-// Guardar la información con espacios, crear un lector
-// ...
-
-void LeerArchivo();
-void AgregarElemento();
-
-int main(int argn, char args[]){
-    Arbol nose;
-    Initialize(&nose);
-
-    LeerArchivo(&nose, "Glosario_MATEMATICAS.txt");
-}
+#include <stdio.h>
 
 void LeerArchivo(Arbol *T, char dir[]){
     printf("Cargando glosario.\n");
@@ -63,12 +46,10 @@ void AgregarElemento(Arbol *T, element e){
     if (IsEmpty(T)){
         NewLeftSon(T, *T, e);
         (*T)->e.n = 0;
-        return;
     }
 
     //(*T)->e.n = strcmp(Parent(&(*T))->e.palabra, (*T)->e.palabra);
-    e.n = strcmp(Parent(&(*T), *T)->e.palabra, (*T)->e.palabra);
-
+    e.n = strcmp(Parent(&(*T), *T)->e.palabra, e.palabra);
 
     if (e.n >= (*T)->e.n){
         if ((*T)->derecha)
@@ -85,7 +66,37 @@ void AgregarElemento(Arbol *T, element e){
             NewLeftSon(T, *T, e);
         }
             
+    }   
+}
+
+element BuscarPalabra(Arbol *T, element e){
+    // caso vacio
+
+    e.n = strcmp(Parent(T, *T)->e.palabra, e.palabra);
+
+    if (e.n >= (*T)->e.n){
+        if (!((*T)->derecha)){
+            element undef;
+            strcpy(undef.definicion, "Palabra no encontrada.");
+            return undef;
+        }
+
+        if ((strcmp((*T)->derecha->e.palabra, e.palabra)))
+            return BuscarPalabra(&((*T)->derecha), e);
+        else 
+            return (*T)->derecha->e;
     }
 
-    
+    else if (e.n < (*T)->e.n){
+        if (!((*T)->izquierda)){
+            element undef;
+            strcpy(undef.definicion, "Palabra no encontrada.");
+            return undef;
+        }
+        
+        if ((strcmp((*T)->izquierda->e.palabra, e.palabra)))
+            return BuscarPalabra(&((*T)->izquierda), e);
+        else 
+            return (*T)->izquierda->e; 
+    }
 }
