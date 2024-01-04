@@ -35,6 +35,8 @@ typedef struct nodo{
     nodo *raiz;
 } Arbol;
 */
+
+
 typedef nodo* Arbol;
 
 // Definimos el puntero a un nodo, que es la dirección de memoria del mismo como una posición.

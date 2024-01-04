@@ -6,49 +6,69 @@
 #include <string.h>
 #include <locale.h>
 
-// Hacer un árbol binario de búsqueda
-// Usar strcmp para ubicar palabras mayores y menores
-// Guardar la información con espacios, crear un lector
-// ...
-
-
-
 int main(int argn, char args[]){
-    setlocale(LC_ALL, "es_MX.utf8");
-
     Arbol diccionario;
     Initialize(&diccionario);
 
-    char command[10];
+    char command[121] = "";
 
     while (strcmp(command, "salir")){
-        fgets(command, 100, stdin);
+        fgets(command, 121, stdin);
         command[strcspn(command, "\n")] = 0;
 
+        char *func = command;
+        char *argument;
+        argument = strtok_r(command, " ", &func);
+
         if (!(strcmp(command, "cargar"))){
-            char dir[100];
-            printf("Nombre del archivo a leer: ");
-            fgets(dir, 100, stdin);
-            dir[strcspn(dir, "\n")] = 0;
-            LeerArchivo(&diccionario, dir);
+            LeerArchivo(&diccionario, func);
         }
         else if (!(strcmp(command, "agregar"))){
-            //
+            char nueva_definicion[251];
+
+            printf("Definicion: ");
+            fgets(nueva_definicion, 250, stdin);
+            nueva_definicion[strcspn(nueva_definicion, "\n")] = 0;
+
+            element aux;
+            strcpy(aux.palabra, func);
+            strcpy(aux.definicion, nueva_definicion);
+
+            AgregarElemento(&diccionario, aux);
+        }
+        if (IsEmpty(&diccionario)){
+            printf("No se puede realizar esta operacion sobre un arbol vacio.");
         }
         else if (!(strcmp(command, "buscar"))){
-            char busqueda[101];
-            fgets(busqueda, 100, stdin);
-            busqueda[strcspn(busqueda, "\n")] = 0;
             element aux;
-            strcpy(aux.palabra, busqueda);
+
+            strcpy(aux.palabra, func);
+
             element def = BuscarPalabra(&diccionario, aux);
+
             printf("%s\n", def.definicion);
         }
         else if (!(strcmp(command, "modificar"))){
-            //
+            char nueva_definicion[251];
+
+            printf("Nueva definicion: ");
+            fgets(nueva_definicion, 250, stdin);
+            nueva_definicion[strcspn(nueva_definicion, "\n")] = 0;
+
+            element aux;
+
+            strcpy(aux.definicion, nueva_definicion);
+            strcpy(aux.palabra, func);
+
+
+            ModificarElemento(&diccionario, aux);
+            //...
         }
         else if (!(strcmp(command, "eliminar"))){
-            //
+            element aux;
+            strcpy(aux.palabra, func);
+            EliminarElemento(&diccionario, aux);
+            printf("Elemento eliminado.\n");
         }
         else if (!(strcmp(command, "no se"))){
             //
@@ -56,21 +76,9 @@ int main(int argn, char args[]){
         else if (!(strcmp(command, "help"))){
             //
         }
+
     }
 
-
-    /*
-    Arbol nose;
-    Initialize(&nose);
-
-    LeerArchivo(&nose, "Glosario_MATEMATICAS.txt");
-
-    element e;
-    strcpy(e.palabra, "Sucesión convergente");
-    element def = BuscarPalabra(&nose, e);
-    printf("Definicion: %s\n", def.definicion);
-    */
-
+    Destroy(&diccionario);
     return 0;
 }
-

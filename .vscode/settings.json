@@ -1,6 +1,8 @@
 {
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
-        "tadarbol_bin.h": "c"
+        "tadarbol_bin.h": "c",
+        "type_traits": "c",
+        "tadlistasl.h": "c"
     }
 }
