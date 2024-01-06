@@ -9,6 +9,7 @@ Fecha: 23 de dicimebre de 2023.
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 void Initialize(Arbol *T){
     (*T) = NULL;
@@ -84,21 +85,16 @@ bool IsEmpty(Arbol *T){
 }
 
 bool NullNode(Arbol *T, position p){
-    bool r, l;
+    // Si el árbol está vacío o llegamos a un nodo nulo, p no está en el árbol.
+    if (T == NULL || *T == NULL)
+        return true;
 
-    if (!p)
-        r = true;
+    // Si el nodo actual es igual a p, entonces hemos encontrado p en el árbol.
+    if (*T == p)
+        return false;
 
-    if ((*T) == p)
-        r = false;
-
-    if ((*T)->izquierda)
-        r = NullNode(&((*T)->izquierda), p);
-
-    if ((*T)->derecha)
-        l = NullNode(&((*T)->derecha), p);
-
-    return r && l; 
+    // Buscar recursivamente en el subárbol izquierdo y derecho.
+    return NullNode(&((*T)->izquierda), p) && NullNode(&((*T)->derecha), p);
 }
 
 element ReadNode(Arbol *T, position p){
@@ -210,3 +206,33 @@ void ReplaceNode(Arbol *T, position p, element e){
     return;
 }
 
+int max(int n, int m){
+    int r;
+    (n > m) ? (r = n) : (r = m);
+    return r;
+}
+
+int GetHeight(Arbol *T){
+    if (IsEmpty(T)){
+        return 0;
+    }
+    else {
+        int hd = 0;
+        int ld = 0;
+
+        if ((*T)->izquierda){
+            ld = 1 + GetHeight(&((*T)->izquierda));
+        }
+        else if ((*T)->derecha){
+            hd = 1 + GetHeight(&((*T)->derecha));
+        }
+        return max(ld, hd);
+    }
+}
+
+int Count(Arbol *T, position p){
+    if (NullNode(T,p))
+        return 0;
+    else
+        return (1 + Count(T, RightSon(T, p)) + Count(T, LeftSon(T, p)));
+}

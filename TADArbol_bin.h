@@ -145,4 +145,8 @@ void DeleteNode(Arbol *T, position p);
 */
 void ReplaceNode(Arbol *T, position p, element e);
 
+int GetHeight(Arbol *T);
+
+int Count(Arbol *T, position p);
+
 #endif

@@ -24,6 +24,7 @@ int main(int argn, char args[]){
 
         if (!(strcmp(command, "cargar"))){
             LeerArchivo(&diccionario, func);
+            printf("\n");
         }
         else if (!(strcmp(command, "agregar"))){
             char nueva_definicion[251];
@@ -37,9 +38,11 @@ int main(int argn, char args[]){
             strcpy(aux.definicion, nueva_definicion);
 
             AgregarElemento(&diccionario, aux);
+            printf("Palabra agregada.\n\n");
         }
-        if (IsEmpty(&diccionario)){
-            printf("No se puede realizar esta operacion sobre un arbol vacio.");
+        if (IsEmpty(&diccionario) && strcmp(command, "salir")){
+            printf("No se puede realizar esta operacion sobre un arbol vacio.\n");
+            printf("\n");
         }
         else if (!(strcmp(command, "buscar"))){
             element aux;
@@ -49,6 +52,7 @@ int main(int argn, char args[]){
             element def = BuscarPalabra(&diccionario, aux);
 
             printf("%s\n", def.definicion);
+            printf("\n");
         }
         else if (!(strcmp(command, "modificar"))){
             char nueva_definicion[251];
@@ -64,6 +68,8 @@ int main(int argn, char args[]){
 
 
             ModificarElemento(&diccionario, aux);
+            printf("Definición modificada.\n");
+            printf("\n");
             //...
         }
         else if (!(strcmp(command, "eliminar"))){
@@ -71,17 +77,34 @@ int main(int argn, char args[]){
             strcpy(aux.palabra, func);
             EliminarElemento(&diccionario, aux);
             printf("Elemento eliminado.\n");
+            printf("\n");
         }
         else if (!(strcmp(command, "preorden"))){
             PreOrden(&diccionario);
+            printf("\n");
+            printf("\n");
         }
         else if (!(strcmp(command, "inorden"))){
             InOrden(&diccionario);
+            printf("\n");
+            printf("\n");
             //
         }
         else if (!(strcmp(command, "postorden"))){
             PostOrden(&diccionario);
+            printf("\n");
+            printf("\n");
             //
+        }
+        else if (!(strcmp(command, "stat"))){
+            int n_nodos;
+            int altura;
+            
+
+            printf("Estadisticas del árbol: \n");
+            printf("Número total de nodos: %d\n", Count(&diccionario, Root(&diccionario)));
+            printf("Altura: %d\n", GetHeight(&diccionario));
+            printf("\n");
         }
 
     }
