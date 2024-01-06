@@ -12,6 +12,8 @@ int main(int argn, char args[]){
 
     char command[121] = "";
 
+    printf(">> Diccionario con arboles binarios, version 1.1.\n");
+
     while (strcmp(command, "salir")){
         fgets(command, 121, stdin);
         command[strcspn(command, "\n")] = 0;
@@ -70,10 +72,15 @@ int main(int argn, char args[]){
             EliminarElemento(&diccionario, aux);
             printf("Elemento eliminado.\n");
         }
-        else if (!(strcmp(command, "no se"))){
+        else if (!(strcmp(command, "preorden"))){
+            PreOrden(&diccionario);
+        }
+        else if (!(strcmp(command, "inorden"))){
+            InOrden(&diccionario);
             //
         }
-        else if (!(strcmp(command, "help"))){
+        else if (!(strcmp(command, "postorden"))){
+            PostOrden(&diccionario);
             //
         }
 

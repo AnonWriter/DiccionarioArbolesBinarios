@@ -11,4 +11,8 @@ void EliminarElemento(Arbol *T, element e);
 
 element BuscarPalabra(Arbol *T, element e);
 
+void PreOrden(Arbol *a);
+void InOrden(Arbol *a);
+void PostOrden(Arbol *a);
+
 #endif

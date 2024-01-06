@@ -220,3 +220,51 @@ void EliminarElemento(Arbol *T, element e){
         }
     }
 }
+
+void PreOrden(Arbol *a){
+    //
+    element e;
+    strcpy(e.palabra, ReadNode(a, *a).palabra);
+
+    printf("%s - ", e.palabra);
+
+    if ((*a)->izquierda)
+        PreOrden(&((*a)->izquierda));
+
+    if ((*a)->derecha)
+        PreOrden(&((*a)->derecha));
+
+    return;
+}
+
+void InOrden(Arbol *a){
+    //
+    if ((*a)->izquierda)
+        InOrden(&((*a)->izquierda));
+
+    element e;
+    strcpy(e.palabra, ReadNode(a, *a).palabra);
+
+    printf("%s - ", e.palabra);
+
+    if ((*a)->derecha)
+        InOrden(&((*a)->derecha));
+
+    return;
+}
+
+void PostOrden(Arbol *a){
+    //
+    if ((*a)->izquierda)
+        PostOrden(&((*a)->izquierda));
+
+    if ((*a)->derecha)
+        PostOrden(&((*a)->derecha));
+
+    element e;
+    strcpy(e.palabra, ReadNode(a, *a).palabra);
+
+    printf("%s - ", e.palabra);
+
+    return;
+}
